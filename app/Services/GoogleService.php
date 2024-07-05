@@ -16,10 +16,6 @@ class GoogleService
      */
     public function validateUrl(string $url): bool
     {
-        if (empty(env('GOOGLE_API_KEY'))) {
-            return false;
-        }
-
         $client = new Client();
         $response = $client->post('https://safebrowsing.googleapis.com/v4/threatMatches:find?key=' . env('GOOGLE_API_KEY'), [
             'json' => [

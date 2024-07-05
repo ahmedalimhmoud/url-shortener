@@ -61,6 +61,10 @@ class UrlShortnerService
             return response()->json(['url' => $shortenUrl->slug]);
         }
 
+        if (empty(env('GOOGLE_API_KEY'))) {
+            return response()->json(['error' => 'Please add your google api key to env key : GOOGLE_API_KEY'], 400);
+        }
+
         $validation = $this->googleService->validateUrl($url);
 
         if (!$validation) {
